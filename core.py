@@ -5802,6 +5802,22 @@ def compute_rmsd_coords(ref_coords: np.ndarray, probe_coords: np.ndarray) -> Opt
     return float(np.sqrt(np.mean(np.sum((ref_coords - probe_coords) ** 2, axis=1))))
 
 
+def _parse_vina_scores_from_pdbqt(pdbqt_path: str) -> List[float]:
+    """Extract affinity scores from REMARK VINA RESULT lines in PDBQT."""
+    scores = []
+    try:
+        with open(pdbqt_path, "r", errors="ignore") as f:
+            for line in f:
+                if line.strip().startswith("REMARK VINA RESULT:"):
+                    try:
+                        scores.append(float(line.split()[3]))
+                    except Exception:
+                        pass
+    except Exception:
+        pass
+    return scores
+
+
 def parse_docked_poses(
     sdf_path: str,
     ref_mol: Optional[Chem.Mol] = None,
@@ -5820,12 +5836,18 @@ def parse_docked_poses(
         except Exception:
             pass
 
+    # Try reading scores from companion PDBQT (ACD output stores scores there)
+    pdbqt_path = str(sdf_path).replace(".sdf", ".pdbqt").replace("_out.sdf", "_out.pdbqt")
+    vina_scores = _parse_vina_scores_from_pdbqt(pdbqt_path)
+
     poses = []
     idx = 0
     for mol in suppl:
         if mol is None:
             idx += 1
             continue
+
+        # 1. Try SDF property (some pipelines inject score here)
         score = None
         for prop_name in mol.GetPropsAsDict():
             if re.search(r"score|energy|affinity|minimizedAffinity|binding", prop_name, re.I):
@@ -5835,6 +5857,20 @@ def parse_docked_poses(
                     pass
                 if score is not None:
                     break
+
+        # 2. Fallback: use PDBQT REMARK VINA RESULT scores (ACD default output)
+        if score is None and idx < len(vina_scores):
+            score = vina_scores[idx]
+
+        # 3. Last resort: try to parse from mol title/name
+        if score is None:
+            try:
+                title = mol.GetProp("_Name") if mol.HasProp("_Name") else ""
+                m = re.search(r"(-?[0-9]+\.[0-9]+)", title)
+                if m:
+                    score = float(m.group(1))
+            except Exception:
+                pass
 
         rmsd = None
         if ref_mol_noH is not None:
