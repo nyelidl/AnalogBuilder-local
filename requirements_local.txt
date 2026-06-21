@@ -25,11 +25,12 @@ Pillow>=10.0
 requests>=2.31
 
 # ── Interaction analysis ──────────────────────────────────────────────────────
-# Note: plip requires openbabel Python bindings (built from source via SWIG).
-# On Colab: system openbabel is installed via apt; the Python package below
-# picks it up automatically if SWIG is present.
-# If plip install fails, the app falls back to distance-based cIFP.
-plip>=2.3.0
+# plip requires building openbabel Python bindings (SWIG) which fails on
+# Colab and Streamlit Cloud. The app falls back to distance-based cIFP
+# automatically — no user action needed.
+# For true local installs where SWIG is available:
+#   pip install plip
+# plip>=2.3.0
 lxml>=4.2.1
 
 # ── 3D Viewer ────────────────────────────────────────────────────────────────
