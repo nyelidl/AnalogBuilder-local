@@ -15,7 +15,7 @@
 ### Linux (Ubuntu / Debian)
 ```bash
 sudo apt install python3.11 python3.11-venv openbabel libcairo2-dev libpangocairo-1.0-0 && \
-git clone https://github.com/nyelidl/AnalogBuilder.git && \
+git clone https://github.com/nyelidl/AnalogBuilder-local.git && \
 cd AnalogBuilder && \
 python3.11 -m venv venv && \
 source venv/bin/activate && \
@@ -26,7 +26,7 @@ streamlit run app_local.py
 ### macOS
 ```bash
 brew install python@3.11 open-babel cairo pango && \
-git clone https://github.com/nyelidl/AnalogBuilder.git && \
+git clone https://github.com/nyelidl/AnalogBuilder-local.git && \
 cd AnalogBuilder && \
 python3.11 -m venv venv && \
 source venv/bin/activate && \
@@ -45,7 +45,7 @@ For native Windows:
 2. **Cairo & Pango** — via conda: `conda install -c conda-forge cairo pango`
 
 ```bash
-git clone https://github.com/nyelidl/AnalogBuilder.git
+git clone https://github.com/nyelidl/AnalogBuilder-local.git
 cd AnalogBuilder
 python -m venv venv
 venv\Scripts\activate
