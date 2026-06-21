@@ -1,5 +1,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Analog Designer — LOCAL / COLAB requirements
+# Install order matters: openbabel must be installed before plip
+# Run: pip install -r requirements_local.txt
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ── Core UI ──────────────────────────────────────────────────────────────────
@@ -25,27 +27,25 @@ Pillow>=10.0
 requests>=2.31
 
 # ── Interaction analysis ──────────────────────────────────────────────────────
-# plip requires building openbabel Python bindings (SWIG) which fails on
-# Colab and Streamlit Cloud. The app falls back to distance-based cIFP
-# automatically — no user action needed.
-# For true local installs where SWIG is available:
-#   pip install plip
-# plip>=2.3.0
+# openbabel==3.2.0 has a pre-built manylinux wheel (no SWIG required).
+# MUST be installed before plip, otherwise plip tries to build 3.1.1.1 from source.
+openbabel==3.2.0
+plip==2.3.0
 lxml>=4.2.1
 
 # ── 3D Viewer ────────────────────────────────────────────────────────────────
 py3Dmol>=2.0
-# stmol omitted — heavy Jupyter/notebook deps conflict with Colab
 
 # ── 2D Diagrams ──────────────────────────────────────────────────────────────
 cairosvg>=2.7.1
 
 # ── ML: ChemBERTa pocket-aware fragment ranking ──────────────────────────────
-# torch & torchvision are pre-installed on Colab — only need transformers
 transformers>=4.35
-# torch>=2.0       # pre-installed on Colab — skip to avoid reinstall
-# torchvision      # pre-installed on Colab
+# torch and torchvision: pre-installed on Colab (GPU-enabled).
+# For local machines without Colab, uncomment:
+# torch>=2.0
+# torchvision
 
-# ── ML: ADMET-AI (optional — large download ~500 MB) ─────────────────────────
+# ── ML: ADMET-AI (optional — ~500 MB model download) ─────────────────────────
 # Uncomment to enable full Chemprop MPNN ADMET predictions:
 # admet-ai
