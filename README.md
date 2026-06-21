@@ -1,11 +1,13 @@
-# <img src="https://raw.githubusercontent.com/nyelidl/AnalogBuilder/main/.fig/AB.svg" width="32"> nalog Designer — Local Version
+# Analog Builder
+<img src="https://github.com/nyelidl/AnalogBuilder/blob/main/.fig/AB.svg" alt="Analog Builder logo" width="120"/> 
 
-**Analog Designer: ML-guided drug analog generation — Run locally, no limits!**
+**Analog Builder: ML-guided drug analog generation — Run locally, no limits!**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ligandbuilder.streamlit.app)
 
 > Start with a parent SMILES. Select attachment atoms. Let ChemBERTa rank fragments by pocket chemistry. Generate analogs, dock them all — no analog count limit in local mode.
 
+> *21 Jun 2026 · Kowit Hengphasatporn · kowit@ccs.tsukuba.ac.jp · CCS, University of Tsukuba*
 ---
 
 ## 🖥️ Run locally
