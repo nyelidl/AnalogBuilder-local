@@ -12,6 +12,10 @@
 
 ## 🖥️ Run locally
 
+### Google Colab (web-based interface)
+Run locally on Google colab with web-based interface: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1_MW6ZE1dwfJXqgd2mUfSaOp2PTJr6YWw?usp=sharing)
+
+
 ### Linux (Ubuntu / Debian)
 ```bash
 sudo apt install python3.11 python3.11-venv openbabel libcairo2-dev libpangocairo-1.0-0 && \
