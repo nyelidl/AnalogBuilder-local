@@ -1,0 +1,8 @@
+# System packages for LOCAL Analog Designer
+# Ubuntu/Debian: sudo apt-get install $(cat packages_local.txt | grep -v ^#)
+# macOS: brew install $(cat packages_local.txt | grep -v ^# | tr '\n' ' ')
+openbabel
+libcairo2-dev
+libpango1.0-dev
+pkg-config
+python3-dev
