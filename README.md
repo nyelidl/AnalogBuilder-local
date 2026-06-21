@@ -16,7 +16,7 @@
 ```bash
 sudo apt install python3.11 python3.11-venv openbabel libcairo2-dev libpangocairo-1.0-0 && \
 git clone https://github.com/nyelidl/AnalogBuilder-local.git && \
-cd AnalogBuilder && \
+cd AnalogBuilder-local && \
 python3.11 -m venv venv && \
 source venv/bin/activate && \
 pip install -r requirements_local.txt && \
@@ -27,7 +27,7 @@ streamlit run app_local.py
 ```bash
 brew install python@3.11 open-babel cairo pango && \
 git clone https://github.com/nyelidl/AnalogBuilder-local.git && \
-cd AnalogBuilder && \
+cd AnalogBuilder-local && \
 python3.11 -m venv venv && \
 source venv/bin/activate && \
 pip install -r requirements_local.txt && \
